@@ -23,7 +23,7 @@ const GROUP_ICONS = {
 export function Skills() {
   return (
     <Section id="skills" eyebrow="03 / Stack" title="Technical stack" compact>
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid min-w-0 gap-4 sm:grid-cols-2">
         {SKILLS.map((group, index) => {
           const Icon = GROUP_ICONS[group.group] || Code2;
           return (
@@ -33,7 +33,7 @@ export function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.42, delay: index * 0.06 }}
-              className="glass glass-hover p-5"
+              className="glass glass-hover min-w-0 p-5"
             >
               <div className="flex items-center gap-3">
                 <span className="rounded-lg border border-blue/35 bg-blue/10 p-2 text-blue">
@@ -135,7 +135,7 @@ function ContactCard({ card, index }) {
 export function Contact() {
   return (
     <Section id="contact" eyebrow="08 / Contact" title="Contact" compact>
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {CONTACT_CARDS.map((card, index) => (
           <ContactCard key={card.label} card={card} index={index} />
         ))}
@@ -147,7 +147,7 @@ export function Contact() {
 export function Footer() {
   return (
     <footer className="border-t border-line py-8">
-      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 sm:flex-row sm:px-8">
+      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 text-center sm:flex-row sm:px-8 sm:text-left">
         <p className="text-xs font-medium text-mist">
           © {new Date().getFullYear()} Mert Baran Yıldırım
         </p>

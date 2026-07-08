@@ -20,7 +20,7 @@ function VideoPreview({ src, title }) {
 
   if (!src || failed) {
     return (
-      <div className="flex aspect-[16/9] w-full items-center justify-center rounded-lg border border-line bg-ink/75">
+      <div className="flex aspect-[16/9] w-full max-w-full items-center justify-center rounded-lg border border-line bg-ink/75">
         <div className="text-center text-mist/75">
           <Film size={24} className="mx-auto" />
           <span className="mt-2 block text-xs font-semibold uppercase tracking-[0.12em]">
@@ -32,7 +32,7 @@ function VideoPreview({ src, title }) {
   }
 
   return (
-    <div className="relative overflow-hidden rounded-lg border border-line bg-ink">
+    <div className="relative w-full max-w-full overflow-hidden rounded-lg border border-line bg-ink">
       <video
         className="aspect-[16/9] w-full object-cover"
         src={src}
@@ -62,7 +62,7 @@ function PlaceholderPreview({ project }) {
 
   if (project.id === "vantoryn") {
     return (
-      <div className="flex aspect-[16/9] w-full items-center justify-center rounded-lg border border-line bg-ink/75">
+      <div className="flex aspect-[16/9] w-full max-w-full items-center justify-center rounded-lg border border-line bg-ink/75">
         <div className="text-center text-mist/75">
           <Hourglass size={24} className="mx-auto text-blue" />
           <span className="mt-2 block text-xs font-semibold uppercase tracking-[0.12em]">
@@ -74,8 +74,8 @@ function PlaceholderPreview({ project }) {
   }
 
   return (
-    <div className="aspect-[16/9] rounded-lg border border-line bg-[linear-gradient(135deg,rgba(127,159,211,0.12),rgba(16,23,34,0.95))] p-4">
-      <div className="flex h-full flex-col justify-between rounded-md border border-frost/10 bg-ink/55 p-4">
+    <div className="aspect-[16/9] w-full max-w-full rounded-lg border border-line bg-[linear-gradient(135deg,rgba(127,159,211,0.12),rgba(16,23,34,0.95))] p-3 sm:p-4">
+      <div className="flex h-full min-w-0 flex-col justify-between rounded-md border border-frost/10 bg-ink/55 p-3 sm:p-4">
         <div className="flex items-center justify-between gap-3">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.12em] text-blue">
@@ -87,11 +87,11 @@ function PlaceholderPreview({ project }) {
           </div>
           <Icon size={24} className="text-blue" />
         </div>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
           {rows.map((row) => (
             <span
               key={row}
-              className="rounded-md border border-line bg-panel/75 px-3 py-2 text-xs font-medium text-mist"
+              className="min-w-0 rounded-md border border-line bg-panel/75 px-2 py-1.5 text-xs font-medium text-mist sm:px-3 sm:py-2"
             >
               {row}
             </span>
@@ -113,7 +113,7 @@ function ProjectActions({ project }) {
   const hasWindowsDemo = WINDOWS_DEMO_IDS.has(project.id);
 
   return (
-    <div className="mt-5 flex flex-wrap items-center gap-2.5">
+    <div className="mt-4 flex min-w-0 flex-wrap items-center gap-2.5 sm:mt-5">
       {hasWindowsDemo ? (
         <Btn disabled variant="solid">
           <Download size={15} /> Windows demo coming soon
@@ -124,7 +124,7 @@ function ProjectActions({ project }) {
           <ExternalLink size={15} /> Open link
         </Btn>
       ) : (
-        <span className="inline-flex min-h-10 items-center gap-2 rounded-lg border border-line bg-ink/45 px-4 py-2.5 text-sm font-medium text-mist">
+        <span className="inline-flex min-h-10 max-w-full items-center gap-2 whitespace-normal rounded-lg border border-line bg-ink/45 px-3 py-2.5 text-sm font-medium text-mist sm:px-4">
           <LockKeyhole size={15} />
           {project.category === "unity" ? "Link coming soon" : "Private project"}
         </span>
@@ -140,11 +140,11 @@ function ProjectCard({ project, index }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.38, delay: index * 0.04 }}
-      className="glass glass-hover grid gap-5 p-4 sm:p-5 lg:grid-cols-[300px_1fr]"
+      className="glass glass-hover grid min-w-0 gap-4 p-3 sm:p-5 lg:grid-cols-[minmax(240px,300px)_1fr]"
     >
       <ProjectMedia project={project} />
 
-      <div className="min-w-0">
+      <div className="min-w-0 overflow-hidden">
         <div className="flex flex-wrap items-center gap-2">
           <span className="text-xs font-semibold uppercase tracking-[0.12em] text-blue">
             {project.type}
@@ -152,14 +152,14 @@ function ProjectCard({ project, index }) {
           <StatusBadge tone={project.statusTone}>{project.status}</StatusBadge>
         </div>
 
-        <h3 className="mt-3 font-display text-2xl font-semibold text-frost">
+        <h3 className="mt-3 font-display text-xl font-semibold text-frost sm:text-2xl">
           {project.title}
         </h3>
         <p className="mt-3 max-w-3xl text-sm leading-6 text-mist">
           {project.description}
         </p>
 
-        <div className="mt-4 flex flex-wrap gap-2">
+        <div className="mt-4 flex min-w-0 flex-wrap gap-2">
           {project.techStack.map((item) => (
             <Tag key={item}>{item}</Tag>
           ))}

@@ -22,10 +22,15 @@ export default function Nav() {
       transition={{ duration: 0.5 }}
       className="fixed inset-x-0 top-0 z-50 border-b border-frost/10 bg-ink/88 backdrop-blur-xl"
     >
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8">
-        <a href="#top" className="font-display text-base font-semibold tracking-tight">
+      <nav className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3.5 sm:px-8 sm:py-4">
+        <a
+          href="#top"
+          className="min-w-0 font-display text-sm font-semibold tracking-tight sm:text-base"
+        >
           <span className="text-frost">Mert Baran</span>
-          <span className="ml-2 text-blue">MIS / Software</span>
+          <span className="ml-2 hidden text-xs text-blue min-[380px]:inline sm:text-base">
+            MIS / Software
+          </span>
         </a>
 
         <div className="hidden items-center gap-6 md:flex">
@@ -49,7 +54,7 @@ export default function Nav() {
 
         <button
           onClick={() => setOpen(!open)}
-          className="rounded-lg border border-frost/10 p-2 text-mist md:hidden"
+          className="shrink-0 rounded-lg border border-frost/10 p-2 text-mist md:hidden"
           aria-label="Toggle menu"
         >
           {open ? <X size={22} /> : <Menu size={22} />}

@@ -4,11 +4,31 @@
 
 html {
   background-color: #080D14;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 body {
   @apply bg-ink text-frost font-body antialiased;
+  width: 100%;
   overflow-x: hidden;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+#root {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+a, p, h1, h2, h3, h4, span, li {
+  overflow-wrap: anywhere;
+}
+
+img, video, svg, canvas {
+  max-width: 100%;
 }
 
 ::selection {

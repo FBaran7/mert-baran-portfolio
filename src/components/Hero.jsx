@@ -34,42 +34,48 @@ const SELECTED_WORK = [
 
 export default function Hero() {
   return (
-    <section id="top" className="relative border-b border-line bg-ink pt-24">
+    <section id="top" className="relative border-b border-line bg-ink pt-20 sm:pt-24">
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_70%_10%,rgba(127,159,211,0.11),transparent_34%)]" />
 
-      <div className="mx-auto grid max-w-6xl items-center gap-8 px-5 py-14 sm:px-8 md:py-16 lg:grid-cols-[1.05fr_0.95fr]">
+      <div className="mx-auto grid max-w-6xl items-center gap-6 px-4 py-9 sm:gap-8 sm:px-8 sm:py-14 md:py-16 lg:grid-cols-[1.05fr_0.95fr]">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45 }}
-          className="max-w-3xl"
+          className="min-w-0 max-w-3xl"
         >
           <p className="text-sm font-semibold text-blue">
             Management Information Systems student
           </p>
 
-          <h1 className="mt-4 font-display text-4xl font-semibold leading-tight text-frost sm:text-5xl lg:text-6xl">
+          <h1 className="mt-3 font-display text-[clamp(2.25rem,11vw,3.25rem)] font-semibold leading-tight text-frost sm:mt-4 sm:text-5xl lg:text-6xl">
             Hi, I'm Mert Baran.
           </h1>
 
-          <p className="mt-4 max-w-2xl font-display text-xl leading-8 text-frost/90 sm:text-2xl">
+          <p className="mt-4 max-w-2xl font-display text-lg leading-7 text-frost/90 sm:text-2xl sm:leading-8">
             Management Information Systems student building practical software,
             web interfaces, and selected Unity prototypes.
           </p>
 
-          <p className="mt-5 max-w-2xl text-base leading-7 text-mist">
-            I focus on turning real workflows into clean interfaces, small
-            business tools, and presentable project demos. My work combines
-            React, Python, SQL basics, e-commerce operations, and Unity/C#.
+          <p className="mt-4 max-w-2xl text-sm leading-6 text-mist sm:mt-5 sm:text-base sm:leading-7">
+            <span className="sm:hidden">
+              MIS student focused on software, web interfaces, business tools,
+              and selected Unity prototypes.
+            </span>
+            <span className="hidden sm:inline">
+              I focus on turning real workflows into clean interfaces, small
+              business tools, and presentable project demos. My work combines
+              React, Python, SQL basics, e-commerce operations, and Unity/C#.
+            </span>
           </p>
 
-          <div className="mt-6 flex flex-wrap gap-2">
+          <div className="mt-5 flex flex-wrap gap-2 sm:mt-6">
             {CHIPS.map((chip) => (
               <Tag key={chip}>{chip}</Tag>
             ))}
           </div>
 
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-6 flex flex-wrap gap-2.5 sm:mt-8 sm:gap-3">
             <Btn href="#projects">
               <PanelsTopLeft size={16} /> View Projects
             </Btn>
@@ -89,15 +95,15 @@ export default function Hero() {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, delay: 0.08 }}
-          className="glass overflow-hidden"
+          className="glass min-w-0 overflow-hidden"
         >
-          <div className="border-b border-line p-5">
+          <div className="border-b border-line p-4 sm:p-5">
             <div className="flex items-center justify-between gap-4">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.12em] text-blue">
                   Selected work
                 </p>
-                <h2 className="mt-1 font-display text-2xl font-semibold text-frost">
+                <h2 className="mt-1 font-display text-xl font-semibold text-frost sm:text-2xl">
                   Software first, prototypes included.
                 </h2>
               </div>
@@ -110,9 +116,9 @@ export default function Hero() {
               <a
                 key={item.title}
                 href="#projects"
-                className="group flex items-start justify-between gap-4 p-5 transition-colors hover:bg-frost/[0.03]"
+                className="group flex min-w-0 items-start justify-between gap-3 p-4 transition-colors hover:bg-frost/[0.03] sm:gap-4 sm:p-5"
               >
-                <span>
+                <span className="min-w-0">
                   <span className="block font-display text-base font-semibold text-frost">
                     {item.title}
                   </span>

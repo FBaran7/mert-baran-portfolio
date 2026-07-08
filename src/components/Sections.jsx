@@ -11,8 +11,8 @@ export function About() {
       title="Profile"
       compact
     >
-      <div className="grid gap-4 lg:grid-cols-[1.35fr_0.65fr]">
-        <div className="glass p-6">
+      <div className="grid min-w-0 gap-4 lg:grid-cols-[1.35fr_0.65fr]">
+        <div className="glass min-w-0 p-5 sm:p-6">
           <p className="text-base leading-7 text-frost">
             I am a Management Information Systems student interested in
             software development, IT workflows, business systems, and
@@ -21,7 +21,7 @@ export function About() {
           </p>
         </div>
 
-        <div className="glass grid content-center gap-4 p-6">
+        <div className="glass grid min-w-0 content-center gap-4 p-5 sm:p-6">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-blue">
               Current direction
@@ -52,7 +52,7 @@ export function About() {
 
 export function Experience() {
   return (
-    <Section id="experience" eyebrow="05 / Experience" title="Business operations experience">
+    <Section id="experience" eyebrow="05 / Experience" title="Business operations experience" compact>
       <div className="relative space-y-4 border-l border-line pl-7">
         {EXPERIENCE.map((job, index) => (
           <motion.article
@@ -64,7 +64,7 @@ export function Experience() {
             className="relative"
           >
             <span className="absolute -left-[33px] top-2 h-3 w-3 rounded-full border-2 border-blue bg-ink" />
-            <div className="glass glass-hover p-5">
+            <div className="glass glass-hover min-w-0 p-5">
               <div className="flex flex-wrap items-baseline justify-between gap-2">
                 <h3 className="font-display text-lg font-semibold text-frost">
                   {job.role}
@@ -100,7 +100,7 @@ export function Experience() {
 export function Education() {
   return (
     <Section id="education" eyebrow="06 / Education" title="Education" compact>
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid min-w-0 gap-4 md:grid-cols-2">
         {EDUCATION.map((education, index) => (
           <motion.div
             key={education.school}
@@ -108,7 +108,7 @@ export function Education() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.42, delay: index * 0.08 }}
-            className="glass glass-hover p-5"
+            className="glass glass-hover min-w-0 p-5"
           >
             <div className="flex items-start justify-between gap-3">
               <GraduationCap size={22} className="shrink-0 text-blue" />
@@ -134,7 +134,7 @@ export function Education() {
 export function Certifications() {
   return (
     <Section id="certifications" eyebrow="07 / Training" title="Certificates" compact>
-      <div className="grid gap-3 sm:grid-cols-2">
+      <div className="grid min-w-0 gap-3 sm:grid-cols-2">
         {CERTIFICATIONS.map((certification, index) => (
           <motion.div
             key={certification}
