@@ -1,8 +1,13 @@
 import { motion } from "framer-motion";
 
-export function Section({ id, eyebrow, title, children }) {
+export function Section({ id, eyebrow, title, children, compact = false }) {
   return (
-    <section id={id} className="relative mx-auto max-w-6xl px-5 py-20 sm:px-8">
+    <section
+      id={id}
+      className={`relative mx-auto max-w-6xl px-5 sm:px-8 ${
+        compact ? "py-12" : "py-14 sm:py-16"
+      }`}
+    >
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -14,13 +19,13 @@ export function Section({ id, eyebrow, title, children }) {
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue">
             {eyebrow}
           </p>
-          <h2 className="mt-2 max-w-3xl font-display text-3xl font-semibold text-frost sm:text-4xl">
+          <h2 className="mt-2 max-w-3xl font-display text-2xl font-semibold text-frost sm:text-3xl">
             {title}
           </h2>
         </div>
         <div className="h-px w-full max-w-xs bg-gradient-to-r from-teal/70 via-line to-transparent" />
       </motion.div>
-      <div className="mt-10">{children}</div>
+      <div className={compact ? "mt-6" : "mt-8"}>{children}</div>
     </section>
   );
 }
@@ -55,9 +60,9 @@ export function Btn({ href, download, variant = "solid", disabled, children, ...
     "inline-flex min-h-10 items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-all duration-200";
   const variants = {
     solid:
-      "bg-frost text-ink hover:bg-teal hover:shadow-glow active:scale-[0.98]",
+      "bg-frost text-ink hover:bg-blue hover:text-ink active:scale-[0.98]",
     outline:
-      "border border-line bg-ink/30 text-frost hover:border-teal/50 hover:text-teal active:scale-[0.98]",
+      "border border-line bg-ink/30 text-frost hover:border-blue/50 hover:text-blue active:scale-[0.98]",
     ghost: "text-mist hover:bg-frost/5 hover:text-frost",
     disabled:
       "border border-line bg-panel/55 text-mist/55 cursor-not-allowed",

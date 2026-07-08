@@ -22,8 +22,8 @@ const GROUP_ICONS = {
 
 export function Skills() {
   return (
-    <Section id="skills" eyebrow="03 / Stack" title="Practical technical stack">
-      <div className="grid gap-5 sm:grid-cols-2">
+    <Section id="skills" eyebrow="03 / Stack" title="Technical stack" compact>
+      <div className="grid gap-4 sm:grid-cols-2">
         {SKILLS.map((group, index) => {
           const Icon = GROUP_ICONS[group.group] || Code2;
           return (
@@ -33,7 +33,7 @@ export function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.42, delay: index * 0.06 }}
-              className="glass glass-hover p-6"
+              className="glass glass-hover p-5"
             >
               <div className="flex items-center gap-3">
                 <span className="rounded-lg border border-blue/35 bg-blue/10 p-2 text-blue">
@@ -43,7 +43,7 @@ export function Skills() {
                   {group.group}
                 </h3>
               </div>
-              <ul className="mt-5 flex flex-wrap gap-2">
+              <ul className="mt-4 flex flex-wrap gap-2">
                 {group.items.map((skill) => (
                   <li
                     key={skill}
@@ -134,8 +134,8 @@ function ContactCard({ card, index }) {
 
 export function Contact() {
   return (
-    <Section id="contact" eyebrow="08 / Contact" title="Contact">
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <Section id="contact" eyebrow="08 / Contact" title="Contact" compact>
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {CONTACT_CARDS.map((card, index) => (
           <ContactCard key={card.label} card={card} index={index} />
         ))}

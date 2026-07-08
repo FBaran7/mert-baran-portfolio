@@ -16,13 +16,13 @@ export const PROJECTS = [
   {
     id: "baros-erp",
     title: "Baros ERP / Business Dashboard",
-    type: "Software / operations system",
+    type: "Business / Internal Tool",
     subtitle: "ERP-style dashboard for daily business operations",
     role: "Builder of the internal dashboard concept, workflow structure, and business logic",
     whatBuilt:
       "A practical ERP-style dashboard designed around stock, sales, expenses, customer records, barcode lookup, and business reporting.",
     description:
-      "This project connects real business needs to a usable interface: tracking products, understanding daily activity, and reducing manual follow-up across operations.",
+      "An internal ERP-style dashboard for stock, sales, expenses, customer records, barcode lookup, and reporting. Built to support day-to-day business operations with a simple workflow.",
     techStack: ["Python", "Streamlit", "SQLite", "Business logic", "Reporting"],
     keyFeatures: [
       "Stock, sales, expense, and customer record screens",
@@ -41,14 +41,14 @@ export const PROJECTS = [
   {
     id: "portfolio-site",
     title: "Portfolio Website",
-    type: "Web project",
+    type: "Web / React",
     subtitle: "Deploy-ready personal portfolio for software and prototype work",
     role: "Designer/developer of the portfolio structure, responsive UI, content model, and deployment setup",
     whatBuilt:
       "A React/Vite portfolio built to present software projects, Unity prototypes, professional experience, and contact information with a clean developer-focused identity.",
     description:
-      "The site is structured as a deploy-ready portfolio rather than a temporary preview, with production assets, responsive layouts, and clear project storytelling.",
-    techStack: ["React", "Vite", "CSS", "Responsive UI", "Vercel-ready setup"],
+      "A deploy-ready personal portfolio built with React and Vite to present software projects, experience, CV, contact information, and selected prototypes.",
+    techStack: ["React", "Vite", "CSS", "Responsive UI"],
     keyFeatures: [
       "Professional Work/Profile/Stack/Experience structure",
       "Responsive layouts for desktop, tablet, and mobile",
@@ -66,13 +66,13 @@ export const PROJECTS = [
   {
     id: "cyber-dash",
     title: "Cyber Dash",
-    type: "Unity prototype",
+    type: "Unity Prototype",
     subtitle: "Mobile survival prototype with dash-first combat",
     role: "Solo Unity developer: gameplay systems, UI flow, tuning, and reel capture",
     whatBuilt:
       "A top-down cyberpunk survival prototype centered on responsive dashing, enemy pressure, power-up pacing, boss encounters, and readable mobile-first feedback.",
     description:
-      "A compact Unity 2D prototype focused on movement feel, survival rhythm, and a presentable gameplay loop.",
+      "A Unity 2D mobile-style survival prototype focused on dash movement, enemy pressure, power-ups, and a short gameplay reel.",
     techStack: ["Unity 2D", "C#", "Mobile UI", "Gameplay systems"],
     keyFeatures: [
       "Dash-centered player controller and cooldown rhythm",
@@ -91,14 +91,14 @@ export const PROJECTS = [
   {
     id: "deadgear",
     title: "DeadGear",
-    type: "Unity prototype",
+    type: "Unity Prototype",
     subtitle: "Zombie survival and defense systems prototype",
     role: "Solo Unity developer: wave logic, survival systems, and demo stabilization",
     whatBuilt:
       "A wave-based zombie defense prototype with spawn control, day/night pressure, resource points, survival loops, and a darker atmospheric presentation.",
     description:
-      "A Unity 2D survival prototype designed around readable wave escalation, defense pacing, and a stronger mood than a basic test scene.",
-    techStack: ["Unity 2D", "C#", "Wave systems", "Survival loop"],
+      "A Unity 2D zombie survival prototype with wave pacing, spawn logic, survival pressure, and a darker atmosphere.",
+    techStack: ["Unity 2D", "C#", "Wave systems"],
     keyFeatures: [
       "Wave manager and zombie spawn logic",
       "Day/night cycle supporting tension and pacing",
@@ -116,14 +116,14 @@ export const PROJECTS = [
   {
     id: "vantoryn",
     title: "Vantoryn",
-    type: "Unity 3D prototype",
+    type: "Unity 3D Prototype",
     subtitle: "3D superhero simulator in development",
     role: "Unity 3D prototype owner: traversal, combat direction, and city systems",
     whatBuilt:
       "An early Unity 3D superhero simulator concept focused on flight, city traversal, combat direction, and interactive city behavior.",
     description:
-      "A larger prototype direction that remains in development until a stable preview reel is ready.",
-    techStack: ["Unity 3D", "C#", "Traversal prototype", "Combat prototype"],
+      "An early 3D superhero prototype focused on flight, traversal, city interaction, and combat direction.",
+    techStack: ["Unity 3D", "C#"],
     keyFeatures: [
       "Flight and city traversal direction",
       "Prototype combat and interaction planning",
@@ -147,10 +147,9 @@ export const EXPERIENCE = [
     date: "Feb 2026 - Present",
     location: "Istanbul, Turkey",
     bullets: [
-      "Supported day-to-day Trendyol marketplace operations and helped relaunch a dormant store.",
+      "Supported day-to-day Trendyol marketplace operations and store relaunch work.",
       "Managed 572+ orders across inventory coordination, shipping flow, customer communication, and tracking.",
-      "Worked on product listings, pricing, campaign setup, and marketplace content operations.",
-      "Supported product photography, visual editing, and product-page content production.",
+      "Worked on listings, pricing, campaign setup, and product content operations.",
     ],
   },
   {

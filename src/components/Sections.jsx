@@ -8,23 +8,20 @@ export function About() {
     <Section
       id="about"
       eyebrow="02 / Profile"
-      title="A developer profile shaped by software, systems, and operations"
+      title="Profile"
+      compact
     >
-      <div className="grid gap-5 lg:grid-cols-[1.25fr_0.75fr]">
-        <div className="glass p-7 sm:p-8">
-          <p className="text-lg leading-8 text-frost">
-            I am a Management Information Systems student focused on building
-            usable digital systems. My work combines software development,
-            business operations, UI thinking, and prototype development.
-          </p>
-          <p className="mt-5 leading-7 text-mist">
-            I like projects where I can connect a real workflow to a clean
-            interface or playable system, then document it clearly enough for
-            review, deployment, or handoff.
+      <div className="grid gap-4 lg:grid-cols-[1.35fr_0.65fr]">
+        <div className="glass p-6">
+          <p className="text-base leading-7 text-frost">
+            I am a Management Information Systems student interested in
+            software development, IT workflows, business systems, and
+            interactive prototypes. I like building projects that are easy to
+            understand, test, and improve.
           </p>
         </div>
 
-        <div className="glass grid content-center gap-5 p-7 sm:p-8">
+        <div className="glass grid content-center gap-4 p-6">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-blue">
               Current direction
@@ -56,7 +53,7 @@ export function About() {
 export function Experience() {
   return (
     <Section id="experience" eyebrow="05 / Experience" title="Business operations experience">
-      <div className="relative space-y-6 border-l border-line pl-7">
+      <div className="relative space-y-4 border-l border-line pl-7">
         {EXPERIENCE.map((job, index) => (
           <motion.article
             key={job.company}
@@ -67,7 +64,7 @@ export function Experience() {
             className="relative"
           >
             <span className="absolute -left-[33px] top-2 h-3 w-3 rounded-full border-2 border-blue bg-ink" />
-            <div className="glass glass-hover p-6">
+            <div className="glass glass-hover p-5">
               <div className="flex flex-wrap items-baseline justify-between gap-2">
                 <h3 className="font-display text-lg font-semibold text-frost">
                   {job.role}
@@ -102,8 +99,8 @@ export function Experience() {
 
 export function Education() {
   return (
-    <Section id="education" eyebrow="06 / Education" title="Education">
-      <div className="grid gap-5 md:grid-cols-2">
+    <Section id="education" eyebrow="06 / Education" title="Education" compact>
+      <div className="grid gap-4 md:grid-cols-2">
         {EDUCATION.map((education, index) => (
           <motion.div
             key={education.school}
@@ -111,7 +108,7 @@ export function Education() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.42, delay: index * 0.08 }}
-            className="glass glass-hover p-6"
+            className="glass glass-hover p-5"
           >
             <div className="flex items-start justify-between gap-3">
               <GraduationCap size={22} className="shrink-0 text-blue" />
@@ -136,8 +133,8 @@ export function Education() {
 
 export function Certifications() {
   return (
-    <Section id="certifications" eyebrow="07 / Training" title="Certificates">
-      <div className="grid gap-4 sm:grid-cols-2">
+    <Section id="certifications" eyebrow="07 / Training" title="Certificates" compact>
+      <div className="grid gap-3 sm:grid-cols-2">
         {CERTIFICATIONS.map((certification, index) => (
           <motion.div
             key={certification}
