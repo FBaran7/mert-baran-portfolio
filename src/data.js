@@ -1,4 +1,5 @@
 export const LINKS = {
+  fullName: "Mert Baran Yıldırım",
   email: "mertbaran739@gmail.com",
   phone: "+90 535 261 62 92",
   phoneHref: "tel:+905352616292",
@@ -23,7 +24,7 @@ export const PROJECTS = [
     whatBuilt:
       "A practical ERP-style dashboard designed around stock, sales, expenses, customer records, barcode lookup, and business reporting.",
     description:
-      "An internal ERP-style dashboard for stock, sales, expenses, customer records, barcode lookup, and reporting. Built to support day-to-day business operations with a simple workflow.",
+      "An ERP-style dashboard for stock, sales, expenses, customer records, barcode lookup, and reporting. Built around daily business operations and simple workflows.",
     techStack: ["Python", "Streamlit", "SQLite", "Business logic", "Reporting"],
     keyFeatures: [
       "Stock, sales, expense, and customer record screens",
@@ -48,7 +49,7 @@ export const PROJECTS = [
     whatBuilt:
       "A React/Vite portfolio built to present software projects, Unity prototypes, professional experience, and contact information with a clean developer-focused identity.",
     description:
-      "A deploy-ready personal portfolio built with React and Vite to present software projects, experience, CV, contact information, and selected prototypes.",
+      "A deploy-ready React/Vite portfolio for projects, experience, CV, contact information, and selected prototypes.",
     techStack: ["React", "Vite", "CSS", "Responsive UI"],
     keyFeatures: [
       "Professional Work/Profile/Stack/Experience structure",
@@ -73,7 +74,7 @@ export const PROJECTS = [
     whatBuilt:
       "A top-down cyberpunk survival prototype centered on responsive dashing, enemy pressure, power-up pacing, boss encounters, and readable mobile-first feedback.",
     description:
-      "A Unity 2D mobile-style survival prototype focused on dash movement, enemy pressure, power-ups, and a short gameplay reel.",
+      "A Unity 2D mobile-style survival prototype focused on dash movement, enemy pressure, and power-ups.",
     techStack: ["Unity 2D", "C#", "Mobile UI", "Gameplay systems"],
     keyFeatures: [
       "Dash-centered player controller and cooldown rhythm",
@@ -100,7 +101,7 @@ export const PROJECTS = [
     whatBuilt:
       "A wave-based zombie defense prototype with spawn control, day/night pressure, resource points, survival loops, and a darker atmospheric presentation.",
     description:
-      "A Unity 2D zombie survival prototype with wave pacing, spawn logic, survival pressure, and a darker atmosphere.",
+      "A Unity 2D zombie survival prototype with wave pacing, spawn logic, and survival pressure.",
     techStack: ["Unity 2D", "C#", "Wave systems"],
     keyFeatures: [
       "Wave manager and zombie spawn logic",
@@ -121,23 +122,23 @@ export const PROJECTS = [
   {
     id: "vantoryn",
     title: "Vantoryn",
-    type: "Unity 3D Prototype",
-    subtitle: "3D superhero simulator in development",
+    type: "3D Hero Flight Prototype",
+    subtitle: "Unity 3D hero movement and traversal prototype",
     role: "Unity 3D prototype owner: traversal, combat direction, and city systems",
     whatBuilt:
-      "An early Unity 3D superhero simulator concept focused on flight, city traversal, combat direction, and interactive city behavior.",
+      "A Unity 3D hero prototype focused on flight, city traversal, combat direction, and superhero-style movement.",
     description:
-      "An early 3D superhero prototype focused on flight, traversal, city interaction, and combat direction.",
-    techStack: ["Unity 3D", "C#"],
+      "A Unity 3D hero prototype focused on flight, city traversal, combat direction, and superhero-style movement.",
+    techStack: ["Unity 3D", "C#", "Flight system", "Prototype"],
     keyFeatures: [
       "Flight and city traversal direction",
       "Prototype combat and interaction planning",
       "City-system experimentation",
-      "Preview reel pending",
+      "Preview reel available",
     ],
-    status: "In development / preview coming soon",
-    statusTone: "wip",
-    video: null,
+    status: "Preview live / in development",
+    statusTone: "ready",
+    video: "/videos/vantoryn-preview.mp4",
     videoFallback: null,
     poster: null,
     download: null,

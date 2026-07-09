@@ -19,25 +19,25 @@ const CHIPS = [
 
 const SELECTED_WORK = [
   {
-    title: "Baros ERP Dashboard",
-    detail: "Internal tool preview for stock, sales, expenses, and reporting.",
+    title: "Baros ERP",
+    detail: "Business dashboard and internal workflow concept.",
   },
   {
-    title: "Portfolio Website",
-    detail: "React/Vite portfolio for projects, CV, experience, and contact.",
+    title: "Portfolio",
+    detail: "React/Vite site for projects, CV, and contact.",
   },
   {
-    title: "Cyber Dash Reel",
-    detail: "Selected Unity/C# prototype preview.",
+    title: "Vantoryn",
+    detail: "Unity 3D hero flight prototype preview.",
   },
 ];
 
 export default function Hero() {
   return (
-    <section id="top" className="relative border-b border-line bg-ink pt-20 sm:pt-24">
+    <section id="top" className="relative border-b border-line bg-ink pt-[4.5rem] sm:pt-20">
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_70%_10%,rgba(127,159,211,0.11),transparent_34%)]" />
 
-      <div className="mx-auto grid max-w-6xl items-center gap-6 px-4 py-9 sm:gap-8 sm:px-8 sm:py-14 md:py-16 lg:grid-cols-[1.05fr_0.95fr]">
+      <div className="mx-auto grid max-w-6xl items-center gap-6 px-4 py-8 sm:gap-8 sm:px-8 sm:py-12 md:py-14 lg:grid-cols-[1.05fr_0.82fr]">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -48,24 +48,23 @@ export default function Hero() {
             Management Information Systems student
           </p>
 
-          <h1 className="mt-3 font-display text-[clamp(2.25rem,11vw,3.25rem)] font-semibold leading-tight text-frost sm:mt-4 sm:text-5xl lg:text-6xl">
-            Hi, I'm Mert Baran.
+          <h1 className="mt-3 font-display text-[clamp(2.1rem,10vw,3.2rem)] font-semibold leading-tight text-frost sm:mt-4 sm:text-5xl lg:text-[3.35rem]">
+            Hi, I'm {LINKS.fullName}.
           </h1>
 
           <p className="mt-4 max-w-2xl font-display text-lg leading-7 text-frost/90 sm:text-2xl sm:leading-8">
-            Management Information Systems student building practical software,
-            web interfaces, and selected Unity prototypes.
+            Management Information Systems student focused on software, web
+            interfaces, business systems, and selected Unity prototypes.
           </p>
 
           <p className="mt-4 max-w-2xl text-sm leading-6 text-mist sm:mt-5 sm:text-base sm:leading-7">
             <span className="sm:hidden">
-              MIS student focused on software, web interfaces, business tools,
-              and selected Unity prototypes.
+              I build practical projects that connect real workflows with clean
+              interfaces and presentable demos.
             </span>
             <span className="hidden sm:inline">
-              I focus on turning real workflows into clean interfaces, small
-              business tools, and presentable project demos. My work combines
-              React, Python, SQL basics, e-commerce operations, and Unity/C#.
+              I build practical projects that connect real workflows with clean
+              interfaces, documentation, and presentable demos.
             </span>
           </p>
 
@@ -102,8 +101,8 @@ export default function Hero() {
               <div className="relative min-w-0 bg-ink">
                 <img
                   src={LINKS.profilePhoto}
-                  alt="Mert Baran Yildirim"
-                  className="aspect-square h-full w-full object-cover sm:aspect-[4/5] lg:aspect-[16/11]"
+                  alt={LINKS.fullName}
+                  className="aspect-[4/3] h-full w-full object-cover sm:aspect-[4/5] lg:aspect-[16/10]"
                 />
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-ink/80 to-transparent" />
               </div>
@@ -112,11 +111,11 @@ export default function Hero() {
                 <div className="flex items-center gap-2 text-blue">
                   <UserRound size={18} />
                   <p className="text-xs font-semibold uppercase tracking-[0.12em]">
-                    Portfolio profile
+                    {LINKS.fullName}
                   </p>
                 </div>
                 <h2 className="mt-3 font-display text-xl font-semibold text-frost sm:text-2xl">
-                  Practical software, clear interfaces, and presentable demos.
+                  Practical software, clear interfaces, presentable demos.
                 </h2>
                 <p className="mt-3 text-sm leading-6 text-mist">
                   MIS background with hands-on work across business operations,

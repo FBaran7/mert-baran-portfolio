@@ -134,7 +134,7 @@ function ContactCard({ card, index }) {
 
 export function Contact() {
   return (
-    <Section id="contact" eyebrow="08 / Contact" title="Contact" compact>
+    <Section id="contact" eyebrow="09 / Contact" title="Contact" compact>
       <div className="grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {CONTACT_CARDS.map((card, index) => (
           <ContactCard key={card.label} card={card} index={index} />
@@ -149,10 +149,10 @@ export function Footer() {
     <footer className="border-t border-line py-8">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 text-center sm:flex-row sm:px-8 sm:text-left">
         <p className="text-xs font-medium text-mist">
-          © {new Date().getFullYear()} Mert Baran Yıldırım
+          © {new Date().getFullYear()} {LINKS.fullName}
         </p>
         <p className="text-xs font-medium text-mist/70">
-          Unity prototypes, software work, and project reels.
+          MIS, software projects, business systems, and selected Unity prototypes.
         </p>
       </div>
     </footer>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import {
   Download,
@@ -15,30 +15,103 @@ import { Btn, Section, StatusBadge, Tag } from "./ui";
 
 const WINDOWS_DEMO_IDS = new Set(["cyber-dash", "deadgear"]);
 
+function useMediaQuery(query) {
+  const [matches, setMatches] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return undefined;
+
+    const media = window.matchMedia(query);
+    const update = () => setMatches(media.matches);
+
+    update();
+    media.addEventListener?.("change", update);
+    return () => media.removeEventListener?.("change", update);
+  }, [query]);
+
+  return matches;
+}
+
+function useInView() {
+  const [node, setNode] = useState(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    if (!node) return undefined;
+    if (typeof IntersectionObserver === "undefined") {
+      setInView(true);
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { rootMargin: "160px 0px", threshold: 0.28 }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [node]);
+
+  return [setNode, inView];
+}
+
 function VideoPreview({ src, fallbackSrc, poster, title }) {
-  const [active, setActive] = useState(false);
+  const [userStarted, setUserStarted] = useState(false);
   const [failed, setFailed] = useState(false);
   const [posterFailed, setPosterFailed] = useState(false);
   const [currentSrc, setCurrentSrc] = useState(src || fallbackSrc || "");
+  const [frameRef, inView] = useInView();
+  const videoRef = useRef(null);
+  const instanceId = useRef(`video-${Math.random().toString(36).slice(2)}`);
+  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const canAutoPreview = isDesktop && inView;
+  const shouldRenderVideo = (canAutoPreview || userStarted) && !failed;
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (inView && (isDesktop || userStarted)) {
+      const play = video.play();
+      play?.catch?.(() => {});
+    } else {
+      video.pause();
+    }
+  }, [currentSrc, inView, isDesktop, userStarted]);
+
+  useEffect(() => {
+    const pauseOtherPreview = (event) => {
+      if (event.detail !== instanceId.current) {
+        videoRef.current?.pause();
+      }
+    };
+
+    window.addEventListener("portfolio-video-play", pauseOtherPreview);
+    return () => window.removeEventListener("portfolio-video-play", pauseOtherPreview);
+  }, []);
 
   if ((!src && !fallbackSrc) || failed) {
     return (
-      <div className="flex aspect-[16/9] w-full max-w-full items-center justify-center rounded-lg border border-line bg-ink/75">
+      <div
+        ref={frameRef}
+        className="flex aspect-[16/9] w-full max-w-full items-center justify-center rounded-lg border border-line bg-ink/75"
+      >
         <div className="text-center text-mist/75">
           <Film size={24} className="mx-auto" />
           <span className="mt-2 block text-xs font-semibold uppercase tracking-[0.12em]">
-            Video coming soon
+            Preview unavailable
           </span>
         </div>
       </div>
     );
   }
 
-  if (!active) {
+  if (!shouldRenderVideo) {
     return (
       <button
+        ref={frameRef}
         type="button"
-        onClick={() => setActive(true)}
+        onClick={() => setUserStarted(true)}
         className="group relative flex aspect-[16/9] w-full max-w-full items-center justify-center overflow-hidden rounded-lg border border-line bg-ink text-left transition-colors hover:border-blue/45"
         aria-label={`Load ${title}`}
       >
@@ -58,7 +131,7 @@ function VideoPreview({ src, fallbackSrc, poster, title }) {
             <MonitorPlay size={20} />
           </span>
           <span className="mt-3 block font-display text-sm font-semibold text-frost">
-            Load project reel
+            {isDesktop ? "Project preview" : "Tap to load reel"}
           </span>
           <span className="mt-1 block text-xs leading-5 text-mist">
             {title}
@@ -69,16 +142,27 @@ function VideoPreview({ src, fallbackSrc, poster, title }) {
   }
 
   return (
-    <div className="relative w-full max-w-full overflow-hidden rounded-lg border border-line bg-ink">
+    <div
+      ref={frameRef}
+      className="relative w-full max-w-full overflow-hidden rounded-lg border border-line bg-ink"
+    >
       <video
+        ref={videoRef}
         className="aspect-[16/9] w-full object-cover"
         src={currentSrc}
-        controls
+        autoPlay={canAutoPreview}
+        controls={userStarted}
         muted
         loop
         playsInline
         preload="metadata"
         poster={poster || undefined}
+        onClick={() => setUserStarted(true)}
+        onPlay={() => {
+          window.dispatchEvent(
+            new CustomEvent("portfolio-video-play", { detail: instanceId.current })
+          );
+        }}
         onError={() => {
           if (fallbackSrc && currentSrc !== fallbackSrc) {
             setCurrentSrc(fallbackSrc);
@@ -118,18 +202,18 @@ function PlaceholderPreview({ project }) {
   }
 
   return (
-    <div className="aspect-[16/9] w-full max-w-full rounded-lg border border-line bg-[linear-gradient(135deg,rgba(127,159,211,0.12),rgba(16,23,34,0.95))] p-3 sm:p-4">
-      <div className="flex h-full min-w-0 flex-col justify-between rounded-md border border-frost/10 bg-ink/55 p-3 sm:p-4">
+    <div className="aspect-[16/9] w-full max-w-full rounded-lg border border-line bg-[linear-gradient(135deg,rgba(127,159,211,0.10),rgba(16,23,34,0.95))] p-3">
+      <div className="flex h-full min-w-0 flex-col justify-between rounded-md border border-frost/10 bg-ink/55 p-3">
         <div className="flex items-center justify-between gap-3">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.12em] text-blue">
               {isErp ? "Internal tool preview" : "Site structure preview"}
             </p>
-            <p className="mt-2 font-display text-lg font-semibold text-frost">
+            <p className="mt-1.5 font-display text-base font-semibold text-frost">
               {project.title}
             </p>
           </div>
-          <Icon size={24} className="text-blue" />
+          <Icon size={22} className="shrink-0 text-blue" />
         </div>
         <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
           {rows.map((row) => (
@@ -164,7 +248,7 @@ function ProjectActions({ project }) {
   const hasWindowsDemo = WINDOWS_DEMO_IDS.has(project.id);
 
   return (
-    <div className="mt-4 flex min-w-0 flex-wrap items-center gap-2.5 sm:mt-5">
+    <div className="mt-3 flex min-w-0 flex-wrap items-center gap-2.5 sm:mt-4">
       {hasWindowsDemo ? (
         <Btn disabled variant="solid">
           <Download size={15} /> Windows demo coming soon
@@ -191,7 +275,7 @@ function ProjectCard({ project, index }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.38, delay: index * 0.04 }}
-      className="glass glass-hover grid min-w-0 gap-4 p-3 sm:p-5 lg:grid-cols-[minmax(240px,300px)_1fr]"
+      className="glass glass-hover grid min-w-0 gap-3 p-3 sm:p-4 lg:grid-cols-[minmax(200px,250px)_1fr]"
     >
       <ProjectMedia project={project} />
 
@@ -203,14 +287,14 @@ function ProjectCard({ project, index }) {
           <StatusBadge tone={project.statusTone}>{project.status}</StatusBadge>
         </div>
 
-        <h3 className="mt-3 font-display text-xl font-semibold text-frost sm:text-2xl">
+        <h3 className="mt-2.5 font-display text-lg font-semibold text-frost sm:text-xl">
           {project.title}
         </h3>
-        <p className="mt-3 max-w-3xl text-sm leading-6 text-mist">
+        <p className="mt-2 max-w-3xl text-sm leading-6 text-mist">
           {project.description}
         </p>
 
-        <div className="mt-4 flex min-w-0 flex-wrap gap-2">
+        <div className="mt-3 flex min-w-0 flex-wrap gap-2">
           {project.techStack.map((item) => (
             <Tag key={item}>{item}</Tag>
           ))}
@@ -230,7 +314,7 @@ export function Projects() {
       title="Selected projects"
       compact
     >
-      <div className="space-y-4">
+      <div className="space-y-3">
         {PROJECTS.map((project, index) => (
           <ProjectCard key={project.id} project={project} index={index} />
         ))}
@@ -244,12 +328,14 @@ export function Demos() {
   const playableReels = unityProjects.filter(
     (project) => project.video || project.videoFallback
   );
-  const waiting = unityProjects.find((project) => project.id === "vantoryn");
+  const waiting = unityProjects.find(
+    (project) => project.id === "vantoryn" && !project.video && !project.videoFallback
+  );
 
   return (
     <Section
       id="demos"
-      eyebrow="07 / Prototype status"
+      eyebrow="08 / Prototype status"
       title="Unity reels"
       compact
     >
@@ -279,7 +365,7 @@ export function Demos() {
                 </h3>
               </div>
               <p className="mt-2 text-sm leading-6 text-mist">
-                Reel live. Windows demo remains Coming Soon.
+                Preview live. Demo downloads and project links remain Coming Soon.
               </p>
             </div>
           </motion.div>

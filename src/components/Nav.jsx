@@ -27,13 +27,14 @@ export default function Nav() {
           href="#top"
           className="min-w-0 font-display text-sm font-semibold tracking-tight sm:text-base"
         >
-          <span className="text-frost">Mert Baran</span>
+          <span className="text-frost md:hidden">Mert Baran</span>
+          <span className="hidden text-frost md:inline">{LINKS.fullName}</span>
           <span className="ml-2 hidden text-xs text-blue min-[380px]:inline sm:text-base">
             MIS / Software
           </span>
         </a>
 
-        <div className="hidden items-center gap-6 md:flex">
+        <div className="hidden items-center gap-6 lg:flex">
           {NAV.map((n) => (
             <a
               key={n.href}
@@ -54,7 +55,7 @@ export default function Nav() {
 
         <button
           onClick={() => setOpen(!open)}
-          className="shrink-0 rounded-lg border border-frost/10 p-2 text-mist md:hidden"
+          className="shrink-0 rounded-lg border border-frost/10 p-2 text-mist lg:hidden"
           aria-label="Toggle menu"
         >
           {open ? <X size={22} /> : <Menu size={22} />}
@@ -62,7 +63,7 @@ export default function Nav() {
       </nav>
 
       {open && (
-        <div className="border-t border-line bg-ink/95 px-5 pb-4 md:hidden">
+        <div className="border-t border-line bg-ink/95 px-5 pb-4 lg:hidden">
           {NAV.map((n) => (
             <a
               key={n.href}
