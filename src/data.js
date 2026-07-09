@@ -10,6 +10,7 @@ export const LINKS = {
   itch: null,
   itchLabel: "itch.io coming soon",
   cv: "/MERT_BARAN_YILDIRIM_CV.pdf",
+  profilePhoto: "/images/profile.jpg",
 };
 
 export const PROJECTS = [
@@ -82,7 +83,9 @@ export const PROJECTS = [
     ],
     status: "Reel live / demo coming soon",
     statusTone: "ready",
-    video: "/videos/cyber-dash-reel.mp4",
+    video: "/videos/cyber-dash-reel-web.mp4",
+    videoFallback: "/videos/cyber-dash-reel.mp4",
+    poster: null,
     download: null,
     github: null,
     itch: null,
@@ -107,7 +110,9 @@ export const PROJECTS = [
     ],
     status: "Reel live / demo coming soon",
     statusTone: "ready",
-    video: "/videos/deadgear-reel.mp4",
+    video: "/videos/deadgear-reel-web.mp4",
+    videoFallback: "/videos/deadgear-reel.mp4",
+    poster: null,
     download: null,
     github: null,
     itch: null,
@@ -133,6 +138,8 @@ export const PROJECTS = [
     status: "In development / preview coming soon",
     statusTone: "wip",
     video: null,
+    videoFallback: null,
+    poster: null,
     download: null,
     github: null,
     itch: null,

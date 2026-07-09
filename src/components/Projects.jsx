@@ -15,10 +15,13 @@ import { Btn, Section, StatusBadge, Tag } from "./ui";
 
 const WINDOWS_DEMO_IDS = new Set(["cyber-dash", "deadgear"]);
 
-function VideoPreview({ src, title }) {
+function VideoPreview({ src, fallbackSrc, poster, title }) {
+  const [active, setActive] = useState(false);
   const [failed, setFailed] = useState(false);
+  const [posterFailed, setPosterFailed] = useState(false);
+  const [currentSrc, setCurrentSrc] = useState(src || fallbackSrc || "");
 
-  if (!src || failed) {
+  if ((!src && !fallbackSrc) || failed) {
     return (
       <div className="flex aspect-[16/9] w-full max-w-full items-center justify-center rounded-lg border border-line bg-ink/75">
         <div className="text-center text-mist/75">
@@ -31,17 +34,58 @@ function VideoPreview({ src, title }) {
     );
   }
 
+  if (!active) {
+    return (
+      <button
+        type="button"
+        onClick={() => setActive(true)}
+        className="group relative flex aspect-[16/9] w-full max-w-full items-center justify-center overflow-hidden rounded-lg border border-line bg-ink text-left transition-colors hover:border-blue/45"
+        aria-label={`Load ${title}`}
+      >
+        {poster && !posterFailed ? (
+          <img
+            src={poster}
+            alt=""
+            className="absolute inset-0 h-full w-full object-cover opacity-80 transition-transform duration-300 group-hover:scale-[1.02]"
+            onError={() => setPosterFailed(true)}
+          />
+        ) : (
+          <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(127,159,211,0.12),rgba(16,23,34,0.94))]" />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/35 to-transparent" />
+        <div className="relative flex flex-col items-center px-4 text-center">
+          <span className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-frost/15 bg-ink/80 text-blue shadow-card">
+            <MonitorPlay size={20} />
+          </span>
+          <span className="mt-3 block font-display text-sm font-semibold text-frost">
+            Load project reel
+          </span>
+          <span className="mt-1 block text-xs leading-5 text-mist">
+            {title}
+          </span>
+        </div>
+      </button>
+    );
+  }
+
   return (
     <div className="relative w-full max-w-full overflow-hidden rounded-lg border border-line bg-ink">
       <video
         className="aspect-[16/9] w-full object-cover"
-        src={src}
-        autoPlay
+        src={currentSrc}
+        controls
         muted
         loop
         playsInline
         preload="metadata"
-        onError={() => setFailed(true)}
+        poster={poster || undefined}
+        onError={() => {
+          if (fallbackSrc && currentSrc !== fallbackSrc) {
+            setCurrentSrc(fallbackSrc);
+            return;
+          }
+          setFailed(true);
+        }}
         title={title}
       />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/90 to-transparent p-3">
@@ -103,8 +147,15 @@ function PlaceholderPreview({ project }) {
 }
 
 function ProjectMedia({ project }) {
-  if (project.video) {
-    return <VideoPreview src={project.video} title={`${project.title} reel`} />;
+  if (project.video || project.videoFallback) {
+    return (
+      <VideoPreview
+        src={project.video}
+        fallbackSrc={project.videoFallback}
+        poster={project.poster}
+        title={`${project.title} reel`}
+      />
+    );
   }
   return <PlaceholderPreview project={project} />;
 }
@@ -190,7 +241,9 @@ export function Projects() {
 
 export function Demos() {
   const unityProjects = PROJECTS.filter((project) => project.category === "unity");
-  const playableReels = unityProjects.filter((project) => project.video);
+  const playableReels = unityProjects.filter(
+    (project) => project.video || project.videoFallback
+  );
   const waiting = unityProjects.find((project) => project.id === "vantoryn");
 
   return (
@@ -211,7 +264,12 @@ export function Demos() {
             className="glass glass-hover overflow-hidden"
           >
             <div className="p-3">
-              <VideoPreview src={project.video} title={`${project.title} reel`} />
+              <VideoPreview
+                src={project.video}
+                fallbackSrc={project.videoFallback}
+                poster={project.poster}
+                title={`${project.title} reel`}
+              />
             </div>
             <div className="px-5 pb-5">
               <div className="flex items-center gap-2 text-blue">

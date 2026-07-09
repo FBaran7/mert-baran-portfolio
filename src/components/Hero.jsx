@@ -4,8 +4,8 @@ import {
   FileDown,
   Github,
   Linkedin,
-  MonitorPlay,
   PanelsTopLeft,
+  UserRound,
 } from "lucide-react";
 import { LINKS } from "../data";
 import { Btn, Tag } from "./ui";
@@ -95,28 +95,43 @@ export default function Hero() {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, delay: 0.08 }}
-          className="glass min-w-0 overflow-hidden"
+          className="grid min-w-0 gap-4"
         >
-          <div className="border-b border-line p-4 sm:p-5">
-            <div className="flex items-center justify-between gap-4">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-blue">
-                  Selected work
-                </p>
-                <h2 className="mt-1 font-display text-xl font-semibold text-frost sm:text-2xl">
-                  Software first, prototypes included.
-                </h2>
+          <div className="glass min-w-0 overflow-hidden">
+            <div className="grid min-w-0 sm:grid-cols-[0.82fr_1fr] lg:grid-cols-1">
+              <div className="relative min-w-0 bg-ink">
+                <img
+                  src={LINKS.profilePhoto}
+                  alt="Mert Baran Yildirim"
+                  className="aspect-square h-full w-full object-cover sm:aspect-[4/5] lg:aspect-[16/11]"
+                />
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-ink/80 to-transparent" />
               </div>
-              <MonitorPlay size={22} className="text-blue" />
+
+              <div className="min-w-0 p-4 sm:p-5">
+                <div className="flex items-center gap-2 text-blue">
+                  <UserRound size={18} />
+                  <p className="text-xs font-semibold uppercase tracking-[0.12em]">
+                    Portfolio profile
+                  </p>
+                </div>
+                <h2 className="mt-3 font-display text-xl font-semibold text-frost sm:text-2xl">
+                  Practical software, clear interfaces, and presentable demos.
+                </h2>
+                <p className="mt-3 text-sm leading-6 text-mist">
+                  MIS background with hands-on work across business operations,
+                  React interfaces, Python tools, and Unity/C# prototypes.
+                </p>
+              </div>
             </div>
           </div>
 
-          <div className="divide-y divide-line">
+          <div className="grid min-w-0 gap-3 sm:grid-cols-3 lg:grid-cols-1">
             {SELECTED_WORK.map((item) => (
               <a
                 key={item.title}
                 href="#projects"
-                className="group flex min-w-0 items-start justify-between gap-3 p-4 transition-colors hover:bg-frost/[0.03] sm:gap-4 sm:p-5"
+                className="glass glass-hover group flex min-w-0 items-start justify-between gap-3 p-4"
               >
                 <span className="min-w-0">
                   <span className="block font-display text-base font-semibold text-frost">
@@ -132,21 +147,6 @@ export default function Hero() {
                 />
               </a>
             ))}
-          </div>
-
-          <div className="border-t border-line bg-black/25 p-3">
-            <video
-              className="aspect-[16/9] w-full rounded-lg object-cover"
-              src="/videos/cyber-dash-reel.mp4"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-            />
-            <p className="mt-2 text-xs font-medium text-mist">
-              Compact preview: Cyber Dash gameplay reel
-            </p>
           </div>
         </motion.aside>
       </div>
