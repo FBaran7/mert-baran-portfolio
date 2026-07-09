@@ -52,7 +52,7 @@ export function About() {
 
 export function Experience() {
   return (
-    <Section id="experience" eyebrow="05 / Experience" title="Business operations experience" compact>
+    <Section id="experience" eyebrow="04 / Experience" title="Work experience" compact>
       <div className="relative space-y-4 border-l border-line pl-7">
         {EXPERIENCE.map((job, index) => (
           <motion.article
@@ -99,7 +99,7 @@ export function Experience() {
 
 export function Education() {
   return (
-    <Section id="education" eyebrow="06 / Education" title="Education" compact>
+    <Section id="education" eyebrow="05 / Education" title="Education" compact>
       <div className="grid min-w-0 gap-4 md:grid-cols-2">
         {EDUCATION.map((education, index) => (
           <motion.div
@@ -133,7 +133,7 @@ export function Education() {
 
 export function Certifications() {
   return (
-    <Section id="certifications" eyebrow="07 / Training" title="Certificates" compact>
+    <Section id="certifications" eyebrow="06 / Training" title="Certificates" compact>
       <div className="grid min-w-0 gap-3 sm:grid-cols-2">
         {CERTIFICATIONS.map((certification, index) => (
           <motion.div

@@ -4,7 +4,6 @@ import {
   Download,
   ExternalLink,
   Film,
-  Hourglass,
   LayoutDashboard,
   LockKeyhole,
   MonitorPlay,
@@ -55,7 +54,13 @@ function useInView() {
   return [setNode, inView];
 }
 
-function VideoPreview({ src, fallbackSrc, poster, title }) {
+function frameClasses(aspect) {
+  return aspect === "portrait"
+    ? "aspect-[9/16] w-full max-w-[220px] sm:max-w-[240px]"
+    : "aspect-video w-full";
+}
+
+function VideoPreview({ src, fallbackSrc, poster, title, aspect = "landscape" }) {
   const [userStarted, setUserStarted] = useState(false);
   const [failed, setFailed] = useState(false);
   const [posterFailed, setPosterFailed] = useState(false);
@@ -66,6 +71,7 @@ function VideoPreview({ src, fallbackSrc, poster, title }) {
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const canAutoPreview = isDesktop && inView;
   const shouldRenderVideo = (canAutoPreview || userStarted) && !failed;
+  const frame = frameClasses(aspect);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -94,9 +100,9 @@ function VideoPreview({ src, fallbackSrc, poster, title }) {
     return (
       <div
         ref={frameRef}
-        className="flex aspect-[16/9] w-full max-w-full items-center justify-center rounded-lg border border-line bg-ink/75"
+        className={`flex ${frame} items-center justify-center rounded-xl border border-line bg-ink`}
       >
-        <div className="text-center text-mist/75">
+        <div className="text-center text-mist/80">
           <Film size={24} className="mx-auto" />
           <span className="mt-2 block text-xs font-semibold uppercase tracking-[0.12em]">
             Preview unavailable
@@ -112,28 +118,28 @@ function VideoPreview({ src, fallbackSrc, poster, title }) {
         ref={frameRef}
         type="button"
         onClick={() => setUserStarted(true)}
-        className="group relative flex aspect-[16/9] w-full max-w-full items-center justify-center overflow-hidden rounded-lg border border-line bg-ink text-left transition-colors hover:border-blue/45"
+        className={`group relative flex ${frame} items-center justify-center overflow-hidden rounded-xl border border-line bg-frost text-left transition-colors hover:border-blue/45`}
         aria-label={`Load ${title}`}
       >
         {poster && !posterFailed ? (
           <img
             src={poster}
             alt=""
-            className="absolute inset-0 h-full w-full object-cover opacity-80 transition-transform duration-300 group-hover:scale-[1.02]"
+            className="absolute inset-0 h-full w-full object-cover opacity-90 transition-transform duration-300 group-hover:scale-[1.02]"
             onError={() => setPosterFailed(true)}
           />
         ) : (
-          <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(127,159,211,0.12),rgba(16,23,34,0.94))]" />
+          <div className="absolute inset-0 bg-[linear-gradient(135deg,#2A3547,#141922)]" />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/35 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
         <div className="relative flex flex-col items-center px-4 text-center">
-          <span className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-frost/15 bg-ink/80 text-blue shadow-card">
+          <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/95 text-blue shadow-card">
             <MonitorPlay size={20} />
           </span>
-          <span className="mt-3 block font-display text-sm font-semibold text-frost">
-            {isDesktop ? "Project preview" : "Tap to load reel"}
+          <span className="mt-3 block text-sm font-semibold text-white">
+            {isDesktop ? "Play preview" : "Tap to load reel"}
           </span>
-          <span className="mt-1 block text-xs leading-5 text-mist">
+          <span className="mt-1 block text-xs leading-5 text-white/75">
             {title}
           </span>
         </div>
@@ -144,11 +150,11 @@ function VideoPreview({ src, fallbackSrc, poster, title }) {
   return (
     <div
       ref={frameRef}
-      className="relative w-full max-w-full overflow-hidden rounded-lg border border-line bg-ink"
+      className={`relative ${frame} overflow-hidden rounded-xl border border-line bg-black`}
     >
       <video
         ref={videoRef}
-        className="aspect-[16/9] w-full object-cover"
+        className="h-full w-full object-cover"
         src={currentSrc}
         autoPlay={canAutoPreview}
         controls={userStarted}
@@ -172,11 +178,6 @@ function VideoPreview({ src, fallbackSrc, poster, title }) {
         }}
         title={title}
       />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/90 to-transparent p-3">
-        <span className="inline-flex rounded-md bg-ink/75 px-2 py-1 text-xs font-medium text-frost">
-          {title}
-        </span>
-      </div>
     </div>
   );
 }
@@ -188,38 +189,25 @@ function PlaceholderPreview({ project }) {
     ? ["Stock", "Sales", "Expenses", "Customers"]
     : ["Projects", "Experience", "CV", "Contact"];
 
-  if (project.id === "vantoryn") {
-    return (
-      <div className="flex aspect-[16/9] w-full max-w-full items-center justify-center rounded-lg border border-line bg-ink/75">
-        <div className="text-center text-mist/75">
-          <Hourglass size={24} className="mx-auto text-blue" />
-          <span className="mt-2 block text-xs font-semibold uppercase tracking-[0.12em]">
-            Preview coming soon
-          </span>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="aspect-[16/9] w-full max-w-full rounded-lg border border-line bg-[linear-gradient(135deg,rgba(127,159,211,0.10),rgba(16,23,34,0.95))] p-3">
-      <div className="flex h-full min-w-0 flex-col justify-between rounded-md border border-frost/10 bg-ink/55 p-3">
+    <div className="aspect-video w-full max-w-full rounded-xl border border-line bg-ink p-3">
+      <div className="flex h-full min-w-0 flex-col justify-between rounded-lg border border-line bg-panel p-3 shadow-card">
         <div className="flex items-center justify-between gap-3">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-blue">
-              {isErp ? "Internal tool preview" : "Site structure preview"}
+            <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-blue sm:text-xs">
+              {isErp ? "Internal tool preview" : "Site structure"}
             </p>
-            <p className="mt-1.5 font-display text-base font-semibold text-frost">
+            <p className="mt-1 font-display text-sm font-semibold text-frost sm:text-base">
               {project.title}
             </p>
           </div>
-          <Icon size={22} className="shrink-0 text-blue" />
+          <Icon size={20} className="shrink-0 text-blue" />
         </div>
-        <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
+        <div className="grid grid-cols-2 gap-1.5">
           {rows.map((row) => (
             <span
               key={row}
-              className="min-w-0 rounded-md border border-line bg-panel/75 px-2 py-1.5 text-xs font-medium text-mist sm:px-3 sm:py-2"
+              className="min-w-0 rounded-md border border-line bg-ink px-2 py-1.5 text-[11px] font-medium text-mist sm:text-xs"
             >
               {row}
             </span>
@@ -237,6 +225,7 @@ function ProjectMedia({ project }) {
         src={project.video}
         fallbackSrc={project.videoFallback}
         poster={project.poster}
+        aspect={project.aspect}
         title={`${project.title} reel`}
       />
     );
@@ -259,7 +248,7 @@ function ProjectActions({ project }) {
           <ExternalLink size={15} /> Open link
         </Btn>
       ) : (
-        <span className="inline-flex min-h-10 max-w-full items-center gap-2 whitespace-normal rounded-lg border border-line bg-ink/45 px-3 py-2.5 text-sm font-medium text-mist sm:px-4">
+        <span className="inline-flex min-h-10 max-w-full items-center gap-2 whitespace-normal rounded-lg border border-line bg-ink px-3 py-2.5 text-sm font-medium text-mist sm:px-4">
           <LockKeyhole size={15} />
           {project.category === "unity" ? "Link coming soon" : "Private project"}
         </span>
@@ -275,9 +264,11 @@ function ProjectCard({ project, index }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.38, delay: index * 0.04 }}
-      className="glass glass-hover grid min-w-0 gap-3 p-3 sm:p-4 lg:grid-cols-[minmax(200px,250px)_1fr]"
+      className="glass glass-hover grid min-w-0 items-start gap-4 p-4 sm:p-5 lg:grid-cols-[minmax(200px,250px)_1fr] lg:gap-6"
     >
-      <ProjectMedia project={project} />
+      <div className="flex min-w-0 justify-center lg:justify-start">
+        <ProjectMedia project={project} />
+      </div>
 
       <div className="min-w-0 overflow-hidden">
         <div className="flex flex-wrap items-center gap-2">
@@ -287,10 +278,10 @@ function ProjectCard({ project, index }) {
           <StatusBadge tone={project.statusTone}>{project.status}</StatusBadge>
         </div>
 
-        <h3 className="mt-2.5 font-display text-lg font-semibold text-frost sm:text-xl">
+        <h3 className="mt-2.5 font-display text-xl font-semibold text-frost sm:text-2xl">
           {project.title}
         </h3>
-        <p className="mt-2 max-w-3xl text-sm leading-6 text-mist">
+        <p className="mt-2 max-w-3xl text-sm leading-6 text-mist sm:text-[15px] sm:leading-7">
           {project.description}
         </p>
 
@@ -314,83 +305,10 @@ export function Projects() {
       title="Selected projects"
       compact
     >
-      <div className="space-y-3">
+      <div className="space-y-4">
         {PROJECTS.map((project, index) => (
           <ProjectCard key={project.id} project={project} index={index} />
         ))}
-      </div>
-    </Section>
-  );
-}
-
-export function Demos() {
-  const unityProjects = PROJECTS.filter((project) => project.category === "unity");
-  const playableReels = unityProjects.filter(
-    (project) => project.video || project.videoFallback
-  );
-  const waiting = unityProjects.find(
-    (project) => project.id === "vantoryn" && !project.video && !project.videoFallback
-  );
-
-  return (
-    <Section
-      id="demos"
-      eyebrow="08 / Prototype status"
-      title="Unity reels"
-      compact
-    >
-      <div className="grid gap-4 md:grid-cols-3">
-        {playableReels.map((project, index) => (
-          <motion.div
-            key={project.id}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.35, delay: index * 0.05 }}
-            className="glass glass-hover overflow-hidden"
-          >
-            <div className="p-3">
-              <VideoPreview
-                src={project.video}
-                fallbackSrc={project.videoFallback}
-                poster={project.poster}
-                title={`${project.title} reel`}
-              />
-            </div>
-            <div className="px-5 pb-5">
-              <div className="flex items-center gap-2 text-blue">
-                <MonitorPlay size={17} />
-                <h3 className="font-display text-lg font-semibold text-frost">
-                  {project.title}
-                </h3>
-              </div>
-              <p className="mt-2 text-sm leading-6 text-mist">
-                Preview live. Demo downloads and project links remain Coming Soon.
-              </p>
-            </div>
-          </motion.div>
-        ))}
-
-        {waiting && (
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.35, delay: 0.1 }}
-            className="glass flex min-h-[230px] flex-col justify-between p-5"
-          >
-            <div>
-              <Hourglass size={24} className="text-blue" />
-              <h3 className="mt-4 font-display text-lg font-semibold text-frost">
-                {waiting.title}
-              </h3>
-              <p className="mt-2 text-sm leading-6 text-mist">
-                Preview coming soon.
-              </p>
-            </div>
-            <StatusBadge tone="wip">Coming soon</StatusBadge>
-          </motion.div>
-        )}
       </div>
     </Section>
   );

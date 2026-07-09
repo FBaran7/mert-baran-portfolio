@@ -20,7 +20,7 @@ export default function Nav() {
       initial={{ y: -40, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="fixed inset-x-0 top-0 z-50 border-b border-frost/10 bg-ink/88 backdrop-blur-xl"
+      className="fixed inset-x-0 top-0 z-50 border-b border-line bg-ink/90 backdrop-blur-xl"
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3.5 sm:px-8 sm:py-4">
         <a
@@ -29,7 +29,7 @@ export default function Nav() {
         >
           <span className="text-frost md:hidden">Mert Baran</span>
           <span className="hidden text-frost md:inline">{LINKS.fullName}</span>
-          <span className="ml-2 hidden text-xs text-blue min-[380px]:inline sm:text-base">
+          <span className="ml-2 hidden text-xs font-body font-medium text-mist min-[380px]:inline sm:text-sm">
             MIS / Software
           </span>
         </a>
@@ -47,7 +47,7 @@ export default function Nav() {
           <a
             href={LINKS.cv}
             download
-            className="inline-flex items-center gap-1.5 rounded-lg border border-frost/15 px-3 py-1.5 text-sm text-frost transition-all hover:border-teal/50 hover:text-teal"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-frost px-3 py-1.5 text-sm font-medium text-white transition-all hover:bg-blue"
           >
             <FileDown size={15} /> CV
           </a>
@@ -55,7 +55,7 @@ export default function Nav() {
 
         <button
           onClick={() => setOpen(!open)}
-          className="shrink-0 rounded-lg border border-frost/10 p-2 text-mist lg:hidden"
+          className="shrink-0 rounded-lg border border-line p-2 text-mist lg:hidden"
           aria-label="Toggle menu"
         >
           {open ? <X size={22} /> : <Menu size={22} />}
@@ -63,7 +63,7 @@ export default function Nav() {
       </nav>
 
       {open && (
-        <div className="border-t border-line bg-ink/95 px-5 pb-4 lg:hidden">
+        <div className="border-t border-line bg-ink px-5 pb-4 lg:hidden">
           {NAV.map((n) => (
             <a
               key={n.href}
@@ -77,7 +77,7 @@ export default function Nav() {
           <a
             href={LINKS.cv}
             download
-            className="mt-2 inline-flex items-center gap-1.5 rounded-lg border border-frost/15 px-3 py-1.5 text-sm text-frost"
+            className="mt-2 inline-flex items-center gap-1.5 rounded-lg bg-frost px-3 py-1.5 text-sm font-medium text-white"
           >
             <FileDown size={15} /> Download CV
           </a>

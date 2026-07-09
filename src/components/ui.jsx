@@ -23,7 +23,7 @@ export function Section({ id, eyebrow, title, children, compact = false }) {
             {title}
           </h2>
         </div>
-        <div className="h-px w-full max-w-xs bg-gradient-to-r from-blue/60 via-line to-transparent" />
+        <div className="h-px w-full max-w-xs bg-gradient-to-r from-blue/40 via-line to-transparent" />
       </motion.div>
       <div className={compact ? "mt-6" : "mt-8"}>{children}</div>
     </section>
@@ -32,10 +32,10 @@ export function Section({ id, eyebrow, title, children, compact = false }) {
 
 export function StatusBadge({ tone, children }) {
   const tones = {
-    ready: "border-emerald/40 bg-emerald/10 text-emerald",
-    wip: "border-blue/40 bg-blue/10 text-blue",
-    proto: "border-mist/30 bg-mist/10 text-mist",
-    soon: "border-line bg-panel text-mist",
+    ready: "border-emerald/30 bg-emerald/10 text-emerald",
+    wip: "border-blue/30 bg-blue/10 text-blue",
+    proto: "border-line bg-ink text-mist",
+    soon: "border-line bg-ink text-mist",
   };
   return (
     <span
@@ -49,7 +49,7 @@ export function StatusBadge({ tone, children }) {
 
 export function Tag({ children }) {
   return (
-    <span className="max-w-full rounded-md border border-line bg-ink/70 px-2.5 py-1 text-[11px] font-medium text-mist">
+    <span className="max-w-full rounded-md border border-line bg-ink px-2.5 py-1 text-[11px] font-medium text-mist">
       {children}
     </span>
   );
@@ -60,12 +60,12 @@ export function Btn({ href, download, variant = "solid", disabled, children, ...
     "inline-flex min-h-10 max-w-full items-center justify-center gap-2 whitespace-normal rounded-lg px-3 py-2.5 text-center text-sm font-medium leading-5 transition-all duration-200 sm:px-4";
   const variants = {
     solid:
-      "bg-frost text-ink hover:bg-blue hover:text-ink active:scale-[0.98]",
+      "bg-frost text-white hover:bg-blue active:scale-[0.98]",
     outline:
-      "border border-line bg-ink/30 text-frost hover:border-blue/50 hover:text-blue active:scale-[0.98]",
+      "border border-frost/20 bg-panel text-frost hover:border-blue hover:text-blue active:scale-[0.98]",
     ghost: "text-mist hover:bg-frost/5 hover:text-frost",
     disabled:
-      "border border-line bg-panel/55 text-mist/55 cursor-not-allowed",
+      "border border-line bg-ink text-mist/60 cursor-not-allowed",
   };
   if (disabled) {
     return (

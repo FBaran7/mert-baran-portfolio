@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html {
-  background-color: #080D14;
+  background-color: #F7F6F2;
   width: 100%;
   overflow-x: hidden;
 }
@@ -32,34 +32,23 @@ img, video, svg, canvas {
 }
 
 ::selection {
-  background: rgba(45, 212, 191, 0.25);
+  background: rgba(36, 84, 156, 0.18);
 }
 
 .glass {
-  @apply rounded-xl border border-line bg-panel/90 shadow-card;
+  @apply rounded-2xl border border-line bg-panel shadow-card;
 }
 
 .glass-hover {
-  @apply transition-all duration-300 hover:border-frost/20 hover:shadow-glow;
+  @apply transition-all duration-300 hover:border-blue/30 hover:shadow-glow;
 }
 
 .bg-grid {
-  background-image:
-    radial-gradient(circle at 72% 0%, rgba(120, 199, 216, 0.07), transparent 34%),
-    radial-gradient(circle at 8% 32%, rgba(127, 159, 211, 0.05), transparent 30%),
-    linear-gradient(180deg, #080D14 0%, #0A1018 48%, #080D14 100%);
-  background-size: 100% 760px, 100% 760px, 100% 100%;
-  background-position: top center;
-}
-
-.hero-vignette {
-  background:
-    linear-gradient(90deg, rgba(8, 13, 20, 0.98) 0%, rgba(8, 13, 20, 0.84) 48%, rgba(8, 13, 20, 0.45) 100%),
-    linear-gradient(180deg, rgba(8, 13, 20, 0.18) 0%, rgba(8, 13, 20, 0.78) 62%, #080D14 100%);
+  background-color: #F7F6F2;
 }
 
 .media-frame {
-  @apply overflow-hidden rounded-xl border border-frost/10 bg-black shadow-card;
+  @apply overflow-hidden rounded-xl border border-line bg-black shadow-card;
 }
 
 video {

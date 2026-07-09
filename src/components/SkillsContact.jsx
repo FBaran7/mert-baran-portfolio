@@ -36,7 +36,7 @@ export function Skills() {
               className="glass glass-hover min-w-0 p-5"
             >
               <div className="flex items-center gap-3">
-                <span className="rounded-lg border border-blue/35 bg-blue/10 p-2 text-blue">
+                <span className="rounded-lg border border-blue/25 bg-blue/10 p-2 text-blue">
                   <Icon size={18} />
                 </span>
                 <h3 className="font-display text-base font-semibold text-frost">
@@ -47,7 +47,7 @@ export function Skills() {
                 {group.items.map((skill) => (
                   <li
                     key={skill}
-                    className="rounded-md border border-line bg-ink/70 px-3 py-1.5 text-xs text-mist transition-colors hover:border-teal/40 hover:text-frost"
+                    className="rounded-md border border-line bg-ink px-3 py-1.5 text-xs font-medium text-mist transition-colors hover:border-blue/40 hover:text-frost"
                   >
                     {skill}
                   </li>
@@ -87,7 +87,7 @@ function ContactCard({ card, index }) {
     "glass glass-hover flex min-w-0 items-center gap-4 p-5 transition-colors";
   const content = (
     <>
-      <span className="rounded-lg border border-blue/35 bg-blue/10 p-2.5 text-blue">
+      <span className="rounded-lg border border-blue/25 bg-blue/10 p-2.5 text-blue">
         <Icon size={20} />
       </span>
       <span className="min-w-0">
@@ -134,7 +134,7 @@ function ContactCard({ card, index }) {
 
 export function Contact() {
   return (
-    <Section id="contact" eyebrow="09 / Contact" title="Contact" compact>
+    <Section id="contact" eyebrow="07 / Contact" title="Contact" compact>
       <div className="grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {CONTACT_CARDS.map((card, index) => (
           <ContactCard key={card.label} card={card} index={index} />
